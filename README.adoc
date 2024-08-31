@@ -1,0 +1,35 @@
+= Keywords Model
+
+This model is online at https://w3id.org/kw/.
+
+This code repository contains documentation for the *_Keywords Model_* developed for the https://www.bodc.ac.uk[British Oceanographic Data Centre]'s _Semantic Analyser_ tool.
+
+The model describes keywords within resources:
+
+* their value - text or an IRI
+* the known vocabularies/thesauri that they are presented it
+* where they were first defined
+* what tool and/or method was used to discover them
+* how certain their existence in the resource is
+* when they were known to be in the resource
+
+== Copyright and License
+
+This repository's code content is licensed for reuse using the https://creativecommons.org/licenses/by/4.0/[Creative Commons BY 4.0 License], a copy of the deed of which is also contained in this repository's LICENSE file.
+
+&copy; KurrawongAI, 2024
+
+
+== Contributing
+
+We welcome contributions in the form of issues raised in this repository's [Issue Tracker](https://github.com/Kurrawong/kw-model/issues) and Pull Requests raised against the repository.
+
+You can also contact the authors, below.
+
+
+== Contacts
+
+_Creator:_ +
+*KurrawongAI* +
+https://kurrawong.ai +
+info@kurrawong.ai +
