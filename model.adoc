@@ -152,6 +152,8 @@ If prefixes - `ex:`, `schema:` and `tern:` in the example above - are not declar
 
 == Introduction
 
+Start...
+
 == Model
 
 == Schema
