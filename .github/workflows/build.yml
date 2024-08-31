@@ -28,6 +28,8 @@ jobs:
         asciidoctor model.adoc -o doc/model.html           
         echo "Add images to doc/"
         cp -r images doc/
+        echo "Add RDF files to doc/"
+        cp *.ttl doc/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
