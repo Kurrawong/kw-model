@@ -455,6 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_introduction">4. Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#_scenarios">4.1. Scenarios</a></li>
+<li><a href="#_provenance">4.2. Provenance</a></li>
 </ul>
 </li>
 <li><a href="#_model">5. Model</a></li>
@@ -493,7 +494,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-<div id="overview" class="imageblock text-center">
+<div id="fig-overview" class="imageblock text-center">
 <div class="content">
 <a class="image" href="images/overview.svg"><img src="images/overview.svg" alt="overview figure"></a>
 </div>
@@ -761,7 +762,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In this document, figures showing model elements use the following key:</p>
 </div>
-<div id="key" class="imageblock text-center">
+<div id="fig-key" class="imageblock text-center">
 <div class="content">
 <a class="image" href="images/key.svg"><img src="images/key.svg" alt="Key for figures"></a>
 </div>
@@ -776,7 +777,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX schema: &lt;https://schema.org/&gt;
 PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 
-ex:396cbad0-1ce8-4401-b193-861118414865
+:resource-x
     a schema:DigitalDocument ;
     schema:keywords
         [
@@ -797,10 +798,10 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 </div>
 </div>
 <div class="paragraph">
-<p>The above example data provides a simple example of a <em>DigitalDocument</em> and several <em>DefinedTerm_s (keywords) for it, one of which is indicated as being within a _DefinedTermSet</em> - a vocabulary, encoded in Turtle.</p>
+<p>The above example data provides a simple example of a <em>DigitalDocument</em> and several <em>DefinedTerm</em> s (keywords) for it, one of which is indicated as being within a <em>DefinedTermSet</em> - a vocabulary, encoded in Turtle.</p>
 </div>
 <div class="paragraph">
-<p>If prefixes - <code>ex:</code>, <code>schema:</code> and <code>tern:</code> in the example above - are not declared within the example, as they are here - lines starting <code>PREFIX</code> - then they will be found in the <a href="#_namespaces">Namespaces</a> table above.</p>
+<p>If prefixes - <code>:</code>, <code>schema:</code> and <code>tern:</code> in the example above - are not declared within the example, as they are here - lines starting <code>PREFIX</code> - then they will be found in the <a href="#_namespaces">Namespaces</a> table above.</p>
 </div>
 </div>
 </div>
@@ -939,10 +940,20 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_provenance"><a class="anchor" href="#_provenance"></a>4.1.5. Provenance</h4>
+</div>
+<div class="sect2">
+<h3 id="_provenance"><a class="anchor" href="#_provenance"></a>4.2. Provenance</h3>
+<div id="fig-provenance" class="imageblock text-center">
+<div class="content">
+<a class="image" href="images/provenance.svg"><img src="images/provenance.svg" alt="provenance figure"></a>
+</div>
+<div class="title">Figure 3. Provenance modelling in this model.</div>
+</div>
 <div class="paragraph">
 <p>This model&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p><mark>TODO: Note about all other general provenance modelling in PROV applying</mark></p>
 </div>
 <div class="paragraph">
 <p>The next section defines the elements - classes and predicates - used in this model. All these definitions are taken from existing models, in particular:</p>
@@ -959,7 +970,6 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 <p><a href="#SKOS">SKOS</a></p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -1090,7 +1100,7 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-08-31 09:15:45 UTC
+Last updated 2024-08-31 09:21:20 UTC
 </div>
 </div>
 </body>
