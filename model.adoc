@@ -16,7 +16,7 @@ The model describes keywords within resources:
 * how certain their existence in the resource is
 * when they were known to be in the resource
 
-[#overview,link="images/overview.svg"]
+[#fig-overview,link="images/overview.svg"]
 .Overview of the Keywords Model.
 image::images/overview.svg[overview figure,align="center"]
 
@@ -118,7 +118,7 @@ SPARQL:: SPARQL is a query language for RDF. SPARQL matches patterns within RDF 
 
 In this document, figures showing model elements use the following key:
 
-[#key,link="images/key.svg"]
+[#fig-key,link="images/key.svg"]
 .Key of model figure elements. `Activity`, `Entity` and `Agent` are classes from <<PROV, The Provenance Ontology>> and indicate temporal events, all manner of things and people and organisations with agency, respectively. Where `prefix:ElementID` is used, the prefix refers to entries in the <<Namespaces, Namespaces table>>.
 image::images/key.svg[Key for figures,align="center"]
 
@@ -131,7 +131,7 @@ Where examples of data are given in this document, it is according to the <<RDFS
 PREFIX schema: <https://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-ex:396cbad0-1ce8-4401-b193-861118414865
+:resource-x
     a schema:DigitalDocument ;
     schema:keywords
         [
@@ -151,9 +151,9 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 .
 ----
 
-The above example data provides a simple example of a _DigitalDocument_ and several _DefinedTerm_s (keywords) for it, one of which is indicated as being within a _DefinedTermSet_ - a vocabulary, encoded in Turtle.
+The above example data provides a simple example of a _DigitalDocument_ and several _DefinedTerm_ s (keywords) for it, one of which is indicated as being within a _DefinedTermSet_ - a vocabulary, encoded in Turtle.
 
-If prefixes - `ex:`, `schema:` and `tern:` in the example above - are not declared within the example, as they are here - lines starting `PREFIX` - then they will be found in the <<Namespaces, Namespaces>> table above.
+If prefixes - `:`, `schema:` and `tern:` in the example above - are not declared within the example, as they are here - lines starting `PREFIX` - then they will be found in the <<Namespaces, Namespaces>> table above.
 
 == Introduction
 
@@ -281,10 +281,15 @@ If we extract a textual or token keyword, Keyword M, from Resource N and then wi
 
 ----
 
-==== Provenance
+=== Provenance
+
+[#fig-provenance,link="images/provenance.svg"]
+.Provenance modelling in this model.
+image::images/provenance.svg[provenance figure,align="center"]
 
 This model...
 
+#TODO: Note about all other general provenance modelling in PROV applying#
 
 The next section defines the elements - classes and predicates - used in this model. All these definitions are taken from existing models, in particular:
 
