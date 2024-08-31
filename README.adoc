@@ -13,6 +13,10 @@ The model describes keywords within resources:
 * how certain their existence in the resource is
 * when they were known to be in the resource
 
+== Model tooling
+
+The source files for this model are the `mode.adoc` file and the `images` folder in the main branch of this repository. These are built into the HTML file seen at https://w3id.org/kw/ using https://asciidoctor.org/ run by the `buil.yml` GitHub _Action_ in the folder `.github/workflows/`. The model.html file sits in the gh-pages branch of this repository and is delivered online using GitHub Pages.
+
 == Copyright and License
 
 This repository's code content is licensed for reuse using the https://creativecommons.org/licenses/by/4.0/[Creative Commons BY 4.0 License], a copy of the deed of which is also contained in this repository's LICENSE file.
