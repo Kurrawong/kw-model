@@ -452,7 +452,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_conventions">3.3. Conventions</a></li>
 </ul>
 </li>
-<li><a href="#_introduction">4. Introduction</a></li>
+<li><a href="#_introduction">4. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_scenarios">4.1. Scenarios</a></li>
+</ul>
+</li>
 <li><a href="#_model">5. Model</a></li>
 <li><a href="#_schema">6. Schema</a></li>
 <li><a href="#_validation">7. Validation</a></li>
@@ -488,6 +492,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>when they were known to be in the resource</p>
 </li>
 </ul>
+</div>
+<div id="overview" class="imageblock text-center">
+<div class="content">
+<a class="image" href="images/overview.svg"><img src="images/overview.svg" alt="overview figure"></a>
+</div>
+<div class="title">Figure 1. Overview of the Keywords Model.</div>
 </div>
 </div>
 </div>
@@ -587,6 +597,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">Prefix</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Namespace</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>:</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local graph IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a dummy namespace for "this graph", i.e. the system or file the object is in. Used for instance data - <em>does not resolve</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dcat:</code></p></td>
@@ -750,7 +765,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <a class="image" href="images/key.svg"><img src="images/key.svg" alt="Key for figures"></a>
 </div>
-<div class="title">Figure 1. Key of model figure elements. <code>Activity</code>, <code>Entity</code> and <code>Agent</code> are classes from <a href="#PROV">The Provenance Ontology</a> and indicate temporal events, all manner of things and people and organisations with agency, respectively. Where <code>prefix:ElementID</code> is used, the prefix refers to entries in the <a href="#_namespaces">Namespaces table</a>.</div>
+<div class="title">Figure 2. Key of model figure elements. <code>Activity</code>, <code>Entity</code> and <code>Agent</code> are classes from <a href="#PROV">The Provenance Ontology</a> and indicate temporal events, all manner of things and people and organisations with agency, respectively. Where <code>prefix:ElementID</code> is used, the prefix refers to entries in the <a href="#_namespaces">Namespaces table</a>.</div>
 </div>
 <h4 id="_code" class="discrete">Code</h4>
 <div class="paragraph">
@@ -794,7 +809,158 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>4. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Start&#8230;&#8203;</p>
+<p>This model enables the description of keywords for a resource and keywords being within a vocabulary in qualified and nuanced ways. The reason for this is that we wish to extract keywords from resources using a number of methods, some of which do not produce perfectly certain results, and then we want to determine, or at least guess, what vocabulary/vocabularies the keywords come from.</p>
+</div>
+<div class="paragraph">
+<p>So, as opposed to a direct, and simple, keyword declaration for a resource, perhaps <code>:resource-x schema:keywords :keyword-y</code> and a direct and scimple declaration of that keyword being within a vocabulary, perhaps <code>:keyword-y skos:inScheme :vocab-z</code> we use <a href="#RDF">RDF</a>'s <a href="https://patterns.dataincubator.org/book/qualified-relation.html">qualified relations</a> pattern to link the resource to the keyword value via an intermediary description of the keyword <code>:resource-x schema:keywords :refined-term-n</code> and then <code>:defined-term-m schema:value :keyword-y</code> and then the intermediary description of the keyword to the vocabulary <code>:defined-term-m schema:inDefinedTermSet :defined-term-set-n</code>. We also allow the keyword to be not just an IRI but also textual or an ID - some form of non-language token - since we often see keywords presented in these ways in resources.</p>
+</div>
+<div class="paragraph">
+<p>This model considers the "statement" that a resource contains/uses a keyword and the "statement" that the keyword is within a vocabulary to be potentially uncertain, or certain only to the level of skill of some system that made the statement, so it provides standard modelling of the provenance of the statements, according to <a href="#PROV">PROV</a>.</p>
+</div>
+<div class="paragraph">
+<p>The next few subsections show this model at work in several scenarios.</p>
+</div>
+<div class="sect2">
+<h3 id="_scenarios"><a class="anchor" href="#_scenarios"></a>4.1. Scenarios</h3>
+<div class="sect3">
+<h4 id="_describing_keyword_extraction"><a class="anchor" href="#_describing_keyword_extraction"></a>4.1.1. Describing keyword extraction</h4>
+<div class="paragraph">
+<p>If Method A, implemented by version 1.2 of System B is used to extract from Resource X the Keyword Y:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the resource has/uses the keyword
+:resource-x
+    a schema:DigitalDocument ;
+    schema:keywords :keyword-y ;
+.
+
+# the value of the keyword
+:keyword-y
+    a schema:DefinedTerm ;
+    schema:value "some words" ; # could be an IRI or a token instead of words
+.
+
+# the linking of the above statement to the details of its generation
+[]
+    a rdf:Statement ;
+    rdf:subject :resource-x
+    rdf:predicate schema:keywords ;
+    rdf:object :keyword-y ;
+    prov:wasGeneratedBy :generation-i ;
+    prov:generatedAtTime "2024-08-31T14:15:16" ;
+.
+
+# details of how/when the statement was made
+:generation-i
+    a prov:Generation ;
+    prov:wasAssociatedWith :system-b-version-1.2 ;
+    prov:hasPlan :config-j ;  # not detailed further here
+.
+
+# system version details
+:system-b-version-1.2
+    a prov:SoftwareAgent ;
+    prov:wasRevisionOf :system-b ;
+    schema:version "1.2" ;
+.
+
+:system-b
+    a prov:SoftwareAgent ;
+    schema:name "System B";
+    schema:codeRepository "https://github.com/some-org/system-b" ;
+.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_describing_a_keyword_within_a_vocabulary"><a class="anchor" href="#_describing_a_keyword_within_a_vocabulary"></a>4.1.2. Describing a keyword within a vocabulary</h4>
+<div class="paragraph">
+<p>If a described method, Method 1, determined that Keyword Y was in, and originally defined by, Vocab 2:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
+:keyword-y rdfs:isDefinedBy :vocab-2 .
+
+:keyword-y
+    a schema:DefinedTerm ;
+    schema:value "some words" ; # could be an IRI or a token instead of words
+.
+
+:vocab-2
+    a schema:DefinedTermSet ;
+    schema:name "Vocabulary 2" ;
+.
+
+# the linking of the first statement above to the details of its generation
+[]
+    a rdf:Statement ;
+    rdf:subject :keyword-y ;
+    rdf:predicate rdfs:isDefinedBy ;
+    rdf:object :vocab-2 ;
+    prov:wasGeneratedBy :generation-k ;
+    prov:generatedAtTime "2024-08-31T14:15:17" ;
+.
+
+# details of how/when the statement was made
+:generation-k
+    a prov:Generation ;
+    prov:hasPlan :method-1 ;
+.
+
+# method details
+:method-1 ;
+    a prov:Plan ;
+    schema:value "Details of the plan, in text..." ;  # or
+    schema:url "link-to-the-plan-elsewhere" ;
+.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_matching_a_textual_or_token_keyword_to_an_iri"><a class="anchor" href="#_matching_a_textual_or_token_keyword_to_an_iri"></a>4.1.3. Matching a textual or token keyword to an IRI</h4>
+<div class="paragraph">
+<p>If we extract a textual or token keyword, Keyword M, from Resource N and then wish to see if we can find a version of that keyword formalised within a vocabulary as a resource with an IRI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
+:keyword-y rdfs:isDefinedBy :vocab-2 .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_revising_information_about_keywords_within_vocabularies"><a class="anchor" href="#_revising_information_about_keywords_within_vocabularies"></a>4.1.4. Revising information about keywords within vocabularies</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
+:keyword-y rdfs:isDefinedBy :vocab-2 .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_provenance"><a class="anchor" href="#_provenance"></a>4.1.5. Provenance</h4>
+<div class="paragraph">
+<p>This model&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>The next section defines the elements - classes and predicates - used in this model. All these definitions are taken from existing models, in particular:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#SDO">schema.org</a></p>
+</li>
+<li>
+<p><a href="#PROV">PROV</a></p>
+</li>
+<li>
+<p><a href="#SKOS">SKOS</a></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -807,13 +973,17 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 <div class="sect1">
 <h2 id="_schema"><a class="anchor" href="#_schema"></a>6. Schema</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p><a href="https://w3id.org/kw/.ttl" class="bare">https://w3id.org/kw/.ttl</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_validation"><a class="anchor" href="#_validation"></a>7. Validation</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p><a href="https://w3id.org/kw/validator" class="bare">https://w3id.org/kw/validator</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -920,7 +1090,7 @@ ex:396cbad0-1ce8-4401-b193-861118414865
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-08-31 02:36:34 UTC
+Last updated 2024-08-31 09:15:45 UTC
 </div>
 </div>
 </body>
