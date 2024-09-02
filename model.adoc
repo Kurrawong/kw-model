@@ -494,7 +494,7 @@ Example: see the example for <<schema:DigitalDocument, Digital Document>>.
 
 === Axioms
 
-Non defined.
+None defined.
 
 
 == Schema
