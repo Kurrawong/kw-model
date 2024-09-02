@@ -30,6 +30,8 @@ jobs:
         cp -r images doc/
         echo "Add RDF files to doc/"
         cp *.ttl doc/
+        echo "Add JSON-LD Context"
+        cp context.json doc/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
