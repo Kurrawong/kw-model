@@ -456,9 +456,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_scenarios">4.1. Scenarios</a></li>
 <li><a href="#_provenance">4.2. Provenance</a></li>
+<li><a href="#_model_elements">4.3. Model elements</a></li>
 </ul>
 </li>
-<li><a href="#_model">5. Model</a></li>
+<li><a href="#_model">5. Model</a>
+<ul class="sectlevel2">
+<li><a href="#_classes">5.1. Classes</a></li>
+<li><a href="#_predicates">5.2. Predicates</a></li>
+<li><a href="#_axioms">5.3. Axioms</a></li>
+</ul>
+</li>
 <li><a href="#_schema">6. Schema</a></li>
 <li><a href="#_validation">7. Validation</a></li>
 <li><a href="#_bibliography">8. Bibliography</a></li>
@@ -605,11 +612,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">a dummy namespace for "this graph", i.e. the system or file the object is in. Used for instance data - <em>does not resolve</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dcat:</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/ns/dcat#" class="bare">http://www.w3.org/ns/dcat#</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#DCAT">Data Catalogue Vocabulary</a> namespace</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ex:</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://example.com/</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Generic examples namespace - <em>does not resolve</em></p></td>
@@ -633,11 +635,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>skos:</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2004/02/skos/core#" class="bare">http://www.w3.org/2004/02/skos/core#</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SKOS">Simple Knowledge Organization System (SKOS) ontology</a> namespace</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>time:</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2006/time#" class="bare">http://www.w3.org/2006/time#</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#TIME">Time Ontology</a> in OWL namespace</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd:</code></p></td>
@@ -673,7 +670,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dl>
 <dt class="hdlist1">Blank Node</dt>
 <dd>
-<p>A Blank Node is a node within <a href="#RDF">RDF</a> data that does not have a globally unique or even persistent identifier, instead it is a node that is identifiable only in relation to the other nodes in the RDF data in which it is recorded. Blank Nodes are used to convey things that are entirely dependent on, and meaningless without, other things, for example values for <a href="https://linkeddata.tern.org.au/viewers/tern-ontology?resource=https://w3id.org/tern/ontologies/tern/Result"><code>tern:Result</code></a> classes which only mean something in relation to the <a href="https://linkeddata.tern.org.au/viewers/tern-ontology?resource=https://w3id.org/tern/ontologies/tern/Observation"><code>tern:Observation</code></a> that generated them</p>
+<p>A Blank Node is a node within <a href="#RDF">RDF</a> data that does not have a globally unique or even persistent identifier, instead it is a node that is identifiable only in relation to the other nodes in the RDF data in which it is recorded. Blank Nodes are used to convey things that are entirely dependent on, and meaningless without, other things, for example values for <a href="https://w3id.org/tern/ontologies/tern/Result"><code>tern:Result</code></a> classes which only mean something in relation to the <a href="https://w3id.org/tern/ontologies/tern/Observation"><code>tern:Observation</code></a> that generated them</p>
 </dd>
 </dl>
 </div>
@@ -777,7 +774,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX schema: &lt;https://schema.org/&gt;
 PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 
-:resource-x
+:digital-doc-x
     a schema:DigitalDocument ;
     schema:keywords
         [
@@ -810,13 +807,13 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>4. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This model enables the description of keywords for a resource and keywords being within a vocabulary in qualified and nuanced ways. The reason for this is that we wish to extract keywords from resources using a number of methods, some of which do not produce perfectly certain results, and then we want to determine, or at least guess, what vocabulary/vocabularies the keywords come from.</p>
+<p>This model enables the description of keywords for a resource - a digital document - and keywords being within a vocabulary in qualified and nuanced ways. The reason for this is that we wish to extract keywords from igital documents using a number of methods, some of which do not produce perfectly certain results, and then we want to determine, or at least guess, what vocabulary/vocabularies the keywords come from.</p>
 </div>
 <div class="paragraph">
-<p>So, as opposed to a direct, and simple, keyword declaration for a resource, perhaps <code>:resource-x schema:keywords :keyword-y</code> and a direct and scimple declaration of that keyword being within a vocabulary, perhaps <code>:keyword-y skos:inScheme :vocab-z</code> we use <a href="#RDF">RDF</a>'s <a href="https://patterns.dataincubator.org/book/qualified-relation.html">qualified relations</a> pattern to link the resource to the keyword value via an intermediary description of the keyword <code>:resource-x schema:keywords :refined-term-n</code> and then <code>:defined-term-m schema:value :keyword-y</code> and then the intermediary description of the keyword to the vocabulary <code>:defined-term-m schema:inDefinedTermSet :defined-term-set-n</code>. We also allow the keyword to be not just an IRI but also textual or an ID - some form of non-language token - since we often see keywords presented in these ways in resources.</p>
+<p>So, as opposed to a direct, and simple, keyword declaration for a digital document, perhaps <code>:digital-doc-x schema:keywords :keyword-y</code> and a direct and scimple declaration of that keyword being within a vocabulary, perhaps <code>:keyword-y skos:inScheme :vocab-z</code> we use <a href="#RDF">RDF</a>'s <a href="https://patterns.dataincubator.org/book/qualified-relation.html">qualified relations</a> pattern to link the digital document to the keyword value via an intermediary description of the keyword <code>:digital-doc-x schema:keywords :refined-term-n</code> and then <code>:defined-term-m schema:value :keyword-y</code> and then the intermediary description of the keyword to the vocabulary <code>:defined-term-m schema:inDefinedTermSet :defined-term-set-n</code>. We also allow the keyword to be not just an IRI but also textual or an ID - some form of non-language token - since we often see keywords presented in these ways in digital documents.</p>
 </div>
 <div class="paragraph">
-<p>This model considers the "statement" that a resource contains/uses a keyword and the "statement" that the keyword is within a vocabulary to be potentially uncertain, or certain only to the level of skill of some system that made the statement, so it provides standard modelling of the provenance of the statements, according to <a href="#PROV">PROV</a>.</p>
+<p>This model considers the "statement" that a digital document contains/uses a keyword and the "statement" that the keyword is within a vocabulary to be potentially uncertain, or certain only to the level of skill of some system that made the statement, so it provides standard modelling of the provenance of the statements, according to <a href="#PROV">PROV</a>.</p>
 </div>
 <div class="paragraph">
 <p>The next few subsections show this model at work in several scenarios.</p>
@@ -826,12 +823,12 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="sect3">
 <h4 id="_describing_keyword_extraction"><a class="anchor" href="#_describing_keyword_extraction"></a>4.1.1. Describing keyword extraction</h4>
 <div class="paragraph">
-<p>If Method A, implemented by version 1.2 of System B is used to extract from Resource X the Keyword Y:</p>
+<p>If Method A, implemented by version 1.2 of System B is used to extract from Digital Document X the Keyword Y:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the resource has/uses the keyword
-:resource-x
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the digital document has/uses the keyword
+:digital-doc-x
     a schema:DigitalDocument ;
     schema:keywords :keyword-y ;
 .
@@ -845,7 +842,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 # the linking of the above statement to the details of its generation
 []
     a rdf:Statement ;
-    rdf:subject :resource-x
+    rdf:subject :digital-doc-x
     rdf:predicate schema:keywords ;
     rdf:object :keyword-y ;
     prov:wasGeneratedBy :generation-i ;
@@ -877,12 +874,12 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="sect3">
 <h4 id="_describing_a_keyword_within_a_vocabulary"><a class="anchor" href="#_describing_a_keyword_within_a_vocabulary"></a>4.1.2. Describing a keyword within a vocabulary</h4>
 <div class="paragraph">
-<p>If a described method, Method 1, determined that Keyword Y was in, and originally defined by, Vocab 2:</p>
+<p>If a described method, Method 1, determined that Keyword Y was in Vocab 2:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
-:keyword-y rdfs:isDefinedBy :vocab-2 .
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword is in the vocab
+:keyword-y skos:inScheme :vocab-2 .
 
 :keyword-y
     a schema:DefinedTerm ;
@@ -898,7 +895,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 []
     a rdf:Statement ;
     rdf:subject :keyword-y ;
-    rdf:predicate rdfs:isDefinedBy ;
+    rdf:predicate skos:inScheme ;
     rdf:object :vocab-2 ;
     prov:wasGeneratedBy :generation-k ;
     prov:generatedAtTime "2024-08-31T14:15:17" ;
@@ -918,26 +915,94 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 .</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If Keyword Y was in something other than a vocab, such as a <code>skos:Collection</code>, then the membership property would be different but the rest of the information the same. For a <code>skos:Collection</code>, replace <code>:keyword-y skos:inScheme :vocab-2</code> with <code>:vocab-2 skos:member :keyword-y</code>.</p>
+</div>
+<div class="paragraph">
+<p>If Keyword Y is <em>defined</em> by Vocab 2, then the predicate <code>rdfs:isDefinedBy</code> should be used alongside <code>skos:inScheme</code> to clearly indicate this case:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">:keyword-y
+    skos:inScheme :vocab-2 ;
+    rdfs:isDefinedBy :vocab-2 ;
+.</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_matching_a_textual_or_token_keyword_to_an_iri"><a class="anchor" href="#_matching_a_textual_or_token_keyword_to_an_iri"></a>4.1.3. Matching a textual or token keyword to an IRI</h4>
 <div class="paragraph">
-<p>If we extract a textual or token keyword, Keyword M, from Resource N and then wish to see if we can find a version of that keyword formalised within a vocabulary as a resource with an IRI:</p>
+<p>If we wish to indicate that a textual or token keyword is within (or defined by) a vocab, we can indicate this using the <code>DefinedTerm</code> IRI of the keyword and then apply all the describtpive mechanics given in the above sections to that:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
-:keyword-y rdfs:isDefinedBy :vocab-2 .</code></pre>
+<pre class="highlight"><code class="language-turtle" data-lang="turtle"># they keyword "some_token", given an IRI by us
+:keyword-y
+    a schema:DefinedTerm ;
+    schema:value "some_token" ;
+.
+
+# the statement that the keyword is in the vocab
+:keyword-y skos:inScheme :vocab-2 .</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_revising_information_about_keywords_within_vocabularies"><a class="anchor" href="#_revising_information_about_keywords_within_vocabularies"></a>4.1.4. Revising information about keywords within vocabularies</h4>
+<div class="paragraph">
+<p>If we use more than one method to extract keywords or to associate keywords with vocabs, we can just "stack up" the details of these multiple method runs. Here Keyword I has been determined to be within Vocab P using Method A and within Vocab Q using Method B:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-turtle" data-lang="turtle"># the statement that the keyword was defined by the vocab
-:keyword-y rdfs:isDefinedBy :vocab-2 .</code></pre>
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">:keyword-i skos:inScheme :vocab-p .
+
+:keyword-i skos:inScheme :vocab-q .
+
+[]
+    a rdf:Statement ;
+    rdf:subject :keyword-i ;
+    rdf:predicate skos:inScheme ;
+    rdf:object :vocab-p ;
+    prov:wasGeneratedBy :generation-1 ;
+    prov:generatedAtTime "2024-08-31T14:15:16" ;
+.
+
+:generation-1 prov:hadPlan :method-A .
+
+[]
+    a rdf:Statement ;
+    rdf:subject :keyword-i ;
+    rdf:predicate skos:inScheme ;
+    rdf:object :vocab-q ;
+    prov:wasGeneratedBy :generation-2 ;
+    prov:generatedAtTime "2024-08-31T14:15:17" ;
+.
+
+:generation-2 prov:hadPlan :method-B .</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>We can extract one or both results with SPARQL queries, for example, to find only the <em>latest</em> in-vocab claim for Keyword I:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    SELECT ?vocab
+    WHERE {
+        []
+            rdf:subject :keyword-i ;
+            rdf:predicate skos:inScheme ;
+            rdf:object ?vocab ;
+            prov:wasGeneratedBy ?generation ;
+            prov:generatedAtTime ?time ;
+        .
+    }
+    ORDER BY DESC(?time)
+    LIMIT 1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above query returns <code>:vocab-q</code>.</p>
 </div>
 </div>
 </div>
@@ -950,11 +1015,30 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="title">Figure 3. Provenance modelling in this model.</div>
 </div>
 <div class="paragraph">
-<p>This model&#8230;&#8203;</p>
+<p>The information that this model is interested in the provenance of is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>associations of a keyword with a digital document</p>
+</li>
+<li>
+<p>associations of a keyword with a vocabulary</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p><mark>TODO: Note about all other general provenance modelling in PROV applying</mark></p>
+<p>Provenance modelling is applied to these pieces of information by use of <a href="https://patterns.dataincubator.org/book/reified-statement.html">reification</a> where an <code>rdf:Statement</code> object is used to indicate the <code>subject</code>, <code>predicate</code> and <code>object</code> of the RDF triple of the statement and any other information about it we wish to record, such as when it was made any by what system following what method.</p>
 </div>
+<div class="paragraph">
+<p>This model uses conventional provenance modeling from the <a href="#PROV">PROV</a> Ontology for the provenance information itself, for example, the <code>prov:generatedAtTime</code> used in the previous section&#8217;s examples indicates when a statement was recorded.</p>
+</div>
+<div class="paragraph">
+<p>Note that any other statements valid according to <a href="#PROV">PROV</a> for are allowed by this model.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_model_elements"><a class="anchor" href="#_model_elements"></a>4.3. Model elements</h3>
 <div class="paragraph">
 <p>The next section defines the elements - classes and predicates - used in this model. All these definitions are taken from existing models, in particular:</p>
 </div>
@@ -977,14 +1061,220 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="sect1">
 <h2 id="_model"><a class="anchor" href="#_model"></a>5. Model</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_classes"><a class="anchor" href="#_classes"></a>5.1. Classes</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#schema:DigitalDocument">Digital Document</a></p>
+</li>
+<li>
+<p><a href="#schema:DefinedTerm">Defined Term</a></p>
+</li>
+<li>
+<p><a href="#schema:DefinedTermSet">Defined Term Set</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="schema:DigitalDocument"><a class="anchor" href="#schema:DigitalDocument"></a>5.1.1. DigitalDocument</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/DigitalDocument" class="bare">https://schema.org/DigitalDocument</a>:</p>
+</div>
+<div class="paragraph">
+<p>An electronic file or document.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this class to represent the thing that a keyword is from/in /about, such as a dataset&#8217;s metadata record, or a data file.</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">:digital-doc-x
+    a schema:DigitalDocument ;
+    schema:keywords [
+        a schema:DefinedTerm ;
+        schema:value "structured:token:Y" ;
+    ] ;
+.</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:DefinedTerm"><a class="anchor" href="#schema:DefinedTerm"></a>5.1.2. DefinedTerm</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/DefinedTerm" class="bare">https://schema.org/DefinedTerm</a>:</p>
+</div>
+<div class="paragraph">
+<p>A word, name, acronym, phrase, etc. with a formal definition.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this class to represent a keyword. If the keyword is not a Linked Data <a href="#IRI">IRI</a>, then use this class with a <a href="#BN">Blank Node</a>. Use the predicate <a href="#schema:value">value</a> to indicate a textual or token value for the keyword.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: see the example for <a href="#schema:DigitalDocument">Digital Document</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:DefinedTermSet"><a class="anchor" href="#schema:DefinedTermSet"></a>5.1.3. DefinedTermSet</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/DefinedTermSet" class="bare">https://schema.org/DefinedTermSet</a>:</p>
+</div>
+<div class="paragraph">
+<p>A set of defined terms, for example a set of categories or a classification scheme, a glossary, dictionary or enumeration.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this class to represent a vocabulary ( a <code>skos:ConceptScheme</code>) or a Collection (<code>skos:Collection</code>) that contains and/or defines for the first time, a keyword. Link keywords to a Defined Term Set with the predicate <a href="#schema:inDefinedTermSet">in Defined Term Set</a>.</em></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">:keyword-m
+    a schema:DefinedTerm ;
+.
 
+:keyword-z schema:inDefinedTermSet :dts-n
+
+:dts-n
+    a schema:inDefinedTermSet
+    schema:name "The NNN Vocabulary" ;
+    schema:url "http://somewhere.com/thing/vocan/n" ;
+.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_predicates"><a class="anchor" href="#_predicates"></a>5.2. Predicates</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#schema:keywords">keywords</a></p>
+</li>
+<li>
+<p><a href="#schema:inDefinedTermSet">in Defined Term Set</a></p>
+</li>
+<li>
+<p><a href="#schema:name">name</a></p>
+</li>
+<li>
+<p><a href="#schema:url">url</a></p>
+</li>
+<li>
+<p><a href="#schema:value">value</a></p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="schema:keywords"><a class="anchor" href="#schema:keywords"></a>5.2.1. keywords</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/keywords" class="bare">https://schema.org/keywords</a>:</p>
+</div>
+<div class="paragraph">
+<p>Keywords or tags used to describe some item.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate IRI, text or token keywords for a <a href="#schema:DigitalDocument">Digital Document</a>.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: see the example for <a href="#schema:DigitalDocument">Digital Document</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:inDefinedTermSet"><a class="anchor" href="#schema:inDefinedTermSet"></a>5.2.2. in Defined Term Set</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/inDefinedTermSet" class="bare">https://schema.org/inDefinedTermSet</a>:</p>
+</div>
+<div class="paragraph">
+<p>A DefinedTermSet that contains this term.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate IRI, text or token keywords for a <a href="#schema:DigitalDocument">Digital Document</a>.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: see the example for <a href="#schema:DefinedTermSet">Defined Term Set</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:name"><a class="anchor" href="#schema:name"></a>5.2.3. name</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/name" class="bare">https://schema.org/name</a>:</p>
+</div>
+<div class="paragraph">
+<p>The name of the item.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate the name of a <a href="#schema:DefinedTermSet">Defined Term Set</a> or anything else that needs to have a name, title or label applied to it.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: See the example for <a href="#schema:DefinedTermSet">Defined Term Set</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:url"><a class="anchor" href="#schema:url"></a>5.2.4. url</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/url" class="bare">https://schema.org/url</a>:</p>
+</div>
+<div class="paragraph">
+<p>URL of the item.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate the URL of things which don&#8217;t have IRIs, for example the URL of a online but non-Semantic Web form of a vocabulary.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: See the example for <a href="#schema:DefinedTermSet">Defined Term Set</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:value"><a class="anchor" href="#schema:value"></a>5.2.5. value</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/value" class="bare">https://schema.org/value</a>:</p>
+</div>
+<div class="paragraph">
+<p>The value of a QuantitativeValue or property value node.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate the value of a non-IRI keyword: it&#8217;s textual or token.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: see the example for <a href="#schema:DigitalDocument">Digital Document</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_axioms"><a class="anchor" href="#_axioms"></a>5.3. Axioms</h3>
+<div class="paragraph">
+<p>Non defined.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_schema"><a class="anchor" href="#_schema"></a>6. Schema</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>The schema for this model - the machine-readable form of it - is an <a href="#OWL">OWL</a> document, in the <a href="#TURTLE">Turtle</a> RDF format, online at:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p><a href="https://w3id.org/kw/.ttl" class="bare">https://w3id.org/kw/.ttl</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This document can be downloaded from the link above and used to describe the elements of this model with RDF graphs.</p>
+</div>
+<div class="paragraph">
+<p>A JSON-LD Context Document for this model is available online at:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://w3id.org/kw/context.json" class="bare">https://w3id.org/kw/context.json</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -992,7 +1282,17 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <h2 id="_validation"><a class="anchor" href="#_validation"></a>7. Validation</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>The validator for this model - the machine-readable and executable form of business rules constraining its use - is a is an <a href="#SHACL">SHACL</a> document, in the <a href="#TURTLE">Turtle</a> RDF format, online at:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
 <p><a href="https://w3id.org/kw/validator" class="bare">https://w3id.org/kw/validator</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>THis document can be used with SHACL tools, such as <a href="https://github.com/RDFLib/pySHACL">pySHACL</a> to automatically validate data claiming conformance to this model.</p>
 </div>
 </div>
 </div>
@@ -1100,7 +1400,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-08-31 09:21:20 UTC
+Last updated 2024-09-02 05:51:15 UTC
 </div>
 </div>
 </body>
