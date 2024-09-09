@@ -600,11 +600,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <col style="width: 42.8571%;">
 <col style="width: 42.8572%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Namespace</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Prefix</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Namespace</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kw</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://w3id.org/kw/" class="bare">https://w3id.org/kw/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>The namespace for this model</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>:</code></p></td>
@@ -807,7 +814,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>4. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This model enables the description of keywords for a resource - a digital document - and keywords being within a vocabulary in qualified and nuanced ways. The reason for this is that we wish to extract keywords from igital documents using a number of methods, some of which do not produce perfectly certain results, and then we want to determine, or at least guess, what vocabulary/vocabularies the keywords come from.</p>
+<p>This model enables the description of keywords for a resource - a digital document - and keywords being within a vocabulary in qualified and nuanced ways. The reason for this is that we wish to extract keywords from digital documents using a number of methods, some of which do not produce perfectly certain results, and then we want to determine, or at least guess, what vocabulary/vocabularies the keywords come from.</p>
 </div>
 <div class="paragraph">
 <p>So, as opposed to a direct, and simple, keyword declaration for a digital document, perhaps <code>:digital-doc-x schema:keywords :keyword-y</code> and a direct and scimple declaration of that keyword being within a vocabulary, perhaps <code>:keyword-y skos:inScheme :vocab-z</code> we use <a href="#RDF">RDF</a>'s <a href="https://patterns.dataincubator.org/book/qualified-relation.html">qualified relations</a> pattern to link the digital document to the keyword value via an intermediary description of the keyword <code>:digital-doc-x schema:keywords :refined-term-n</code> and then <code>:defined-term-m schema:value :keyword-y</code> and then the intermediary description of the keyword to the vocabulary <code>:defined-term-m schema:inDefinedTermSet :defined-term-set-n</code>. We also allow the keyword to be not just an IRI but also textual or an ID - some form of non-language token - since we often see keywords presented in these ways in digital documents.</p>
@@ -820,6 +827,22 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 </div>
 <div class="sect2">
 <h3 id="_scenarios"><a class="anchor" href="#_scenarios"></a>4.1. Scenarios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#_describing_keyword_extraction">Describing keyword extraction</a></p>
+</li>
+<li>
+<p><a href="#_describing_a_keyword_within_a_vocabulary">Describing a keyword within a vocabulary</a></p>
+</li>
+<li>
+<p><a href="#_matching_a_textual_or_token_keyword_to_an_iri">Matching a textual or token keyword to an IRI</a></p>
+</li>
+<li>
+<p><a href="#_revising_information_about_keywords_within_vocabularies">Revising information about keywords within vocabularies</a></p>
+</li>
+</ul>
+</div>
 <div class="sect3">
 <h4 id="_describing_keyword_extraction"><a class="anchor" href="#_describing_keyword_extraction"></a>4.1.1. Describing keyword extraction</h4>
 <div class="paragraph">
@@ -1087,6 +1110,9 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="paragraph">
 <p><em>Use this class to represent the thing that a keyword is from/in /about, such as a dataset&#8217;s metadata record, or a data file.</em></p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-turtle" data-lang="turtle">:digital-doc-x
@@ -1150,10 +1176,10 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#schema:keywords">keywords</a></p>
+<p><a href="#schema:inDefinedTermSet">in Defined Term Set</a></p>
 </li>
 <li>
-<p><a href="#schema:inDefinedTermSet">in Defined Term Set</a></p>
+<p><a href="#schema:keywords">keywords</a></p>
 </li>
 <li>
 <p><a href="#schema:name">name</a></p>
@@ -1167,22 +1193,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 </ul>
 </div>
 <div class="sect3">
-<h4 id="schema:keywords"><a class="anchor" href="#schema:keywords"></a>5.2.1. keywords</h4>
-<div class="paragraph">
-<p>Defined as per <a href="https://schema.org/keywords" class="bare">https://schema.org/keywords</a>:</p>
-</div>
-<div class="paragraph">
-<p>Keywords or tags used to describe some item.</p>
-</div>
-<div class="paragraph">
-<p><em>Use this predicate to indicate IRI, text or token keywords for a <a href="#schema:DigitalDocument">Digital Document</a>.</em></p>
-</div>
-<div class="paragraph">
-<p>Example: see the example for <a href="#schema:DigitalDocument">Digital Document</a>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="schema:inDefinedTermSet"><a class="anchor" href="#schema:inDefinedTermSet"></a>5.2.2. in Defined Term Set</h4>
+<h4 id="schema:inDefinedTermSet"><a class="anchor" href="#schema:inDefinedTermSet"></a>5.2.1. in Defined Term Set</h4>
 <div class="paragraph">
 <p>Defined as per <a href="https://schema.org/inDefinedTermSet" class="bare">https://schema.org/inDefinedTermSet</a>:</p>
 </div>
@@ -1194,6 +1205,21 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 </div>
 <div class="paragraph">
 <p>Example: see the example for <a href="#schema:DefinedTermSet">Defined Term Set</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="schema:keywords"><a class="anchor" href="#schema:keywords"></a>5.2.2. keywords</h4>
+<div class="paragraph">
+<p>Defined as per <a href="https://schema.org/keywords" class="bare">https://schema.org/keywords</a>:</p>
+</div>
+<div class="paragraph">
+<p>Keywords or tags used to describe some item.</p>
+</div>
+<div class="paragraph">
+<p><em>Use this predicate to indicate IRI, text or token keywords for a <a href="#schema:DigitalDocument">Digital Document</a>.</em></p>
+</div>
+<div class="paragraph">
+<p>Example: see the example for <a href="#schema:DigitalDocument">Digital Document</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1400,7 +1426,7 @@ PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-09-02 06:52:12 UTC
+Last updated 2024-09-09 11:15:08 UTC
 </div>
 </div>
 </body>
